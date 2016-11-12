@@ -1,9 +1,3 @@
-import React, { Component } from 'react';
-import './App.css';
-
-import Board from './Board';
-
-var WS = window.WS = new window.WebSocket('ws://localhost:8080');
 
 class App extends Component {
   constructor() {

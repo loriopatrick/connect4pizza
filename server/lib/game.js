@@ -25,6 +25,7 @@ class Game {
 
   send_state() {
     var state = {
+      type: 'state',
       game_over: this.game_over,
       my_player: null,
       has_next_turn: false,
@@ -74,8 +75,8 @@ class Game {
     }
 
     for (var i = HEIGHT - 1; i >= 0; --i) {
-      if (board[i] == '-') {
-        board[i] = client.player_name + '.' + (this.next_turn_id++);
+      if (board[move][i] === '-') {
+        board[move][i] = player_name + '.' + (this.next_turn_id++);
         break;
       }
     }
@@ -119,8 +120,8 @@ function playerHasWon(board, color) {
 function checkHorizontals(board, color) {
   var total = 0;
   for (var i = 0; i < HEIGHT; ++i) {
-    for (var k = 0; i < WIDTH; ++k) {
-      if (is_player(board[i][k], color)) {
+    for (var k = 0; k < WIDTH; ++k) {
+      if (is_player(board[k][i], color)) {
         total += 1;
         if (total >= TRAIN) {
           return true;
@@ -141,8 +142,8 @@ function checkHorizontals(board, color) {
 function checkVerticals(board, color) {
   var total = 0;
   for (var i = 0; i < WIDTH; ++i) {
-    for (var k = 0; i < HEIGHT; ++k) {
-      if (is_player(board[k][i], color)) {
+    for (var k = 0; k < HEIGHT; ++k) {
+      if (is_player(board[i][k], color)) {
         total += 1;
         if (total >= TRAIN) {
           return true;
@@ -163,9 +164,25 @@ function checkVerticals(board, color) {
 function checkDiagonals(board, color) {
   var total = 0;
   for (var i = 0; i < HEIGHT - TRAIN + 1; ++i) {
-    for (var k = 0; i < WIDTH - TRAIN + 1; ++k) {
-      for (var j = 0; i < TRAIN; ++i) {
-        if (is_player(board[i + j][k + j], color)) {
+    for (var k = 0; k < WIDTH - TRAIN + 1; ++k) {
+      for (var j = 0; j < TRAIN; ++j) {
+        if (is_player(board[k + j][i + j], color)) {
+          total += 1;
+          if (total >= TRAIN) {
+            return true;
+          }
+        } else {
+          total = 0;
+        }
+      }
+    }
+  }
+
+  total = 0;
+  for (var i = TRAIN - 1; i < HEIGHT; ++i) {
+    for (var k = 0; k < WIDTH - TRAIN + 1; ++k) {
+      for (var j = 0; j < TRAIN; ++j) {
+        if (is_player(board[k + j][i - j], color)) {
           total += 1;
           if (total >= TRAIN) {
             return true;

@@ -45,6 +45,7 @@ class Board extends Component {
           continue;
         }
 
+        console.log('TOKEN', p);
         var [player, turn] = p.split('.');
         var color = player === my_player ? 'r' : 'y';
 
@@ -63,7 +64,7 @@ class Board extends Component {
       }
     }
 
-    if (this.props.allow_input && this.state.input_col !== null) {
+    if (this.props.has_next_turn && this.state.input_col !== null) {
       components.push(
           <div
             key={ 'pieces-' + next_turn_id }
