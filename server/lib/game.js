@@ -23,6 +23,9 @@ class Game {
     this.send_state();
   }
 
+  leave(client) {
+  }
+
   send_state() {
     var state = {
       type: 'state',
@@ -39,7 +42,9 @@ class Game {
 
     state.my_player = 'a';
     state.has_next_turn = this.next_turn === 'a';
-    this.player_a.send(JSON.stringify(state));
+    if (this.player_a) {
+      this.player_a.send(JSON.stringify(state));
+    }
 
     if (state.game_over) {
       state.won = this.winner === 'b';
@@ -47,12 +52,14 @@ class Game {
 
     state.my_player = 'b';
     state.has_next_turn = this.next_turn === 'b';
-    this.player_b.send(JSON.stringify(state));
+    if (this.player_b) {
+      this.player_b.send(JSON.stringify(state));
+    }
   }
 
   move(player_name, client, move) {
     var result = this._move(player_name, client, move);
-    client.send(JSON.stringify(result));
+    client.json(result);
 
     if (result.type !== 'error') {
       this.send_state();

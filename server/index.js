@@ -7,10 +7,24 @@ console.log('server started on port 8080');
 var looking_for_game = null;
 
 server.on('connection', function(client) {
+  client.state = 'no_auth';
+
+  client.json = function(msg) {
+    client.send(JSON.stringify(msg));
+  };
+
+  client.error = function(msg) {
+    client.json({ type: 'error', error: msg });
+  };
+
   client.on('message', function(msg) {
     msg = JSON.parse(msg);
 
     if (msg.type === 'new_game') {
+      if (client.state === 'no_auth') {
+        return client.error('you must first log in');
+      }
+
       if (looking_for_game === null) {
         looking_for_game = client;
       }
