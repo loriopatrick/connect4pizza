@@ -10,9 +10,10 @@
   "author": "",
   "private": true,
   "dependencies": {
-    "express": "^4.14.0",
     "body-parser": "~1.15.1",
     "cookie-parser": "~1.4.3",
-    "debug": "~2.2.0"
+    "debug": "~2.2.0",
+    "express": "^4.14.0",
+    "ws": "^1.1.1"
   }
 }

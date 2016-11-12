@@ -3,12 +3,22 @@ import './App.css';
 
 import Board from './Board';
 
+var ws = new window.WebSocket('ws://localhost:8080');
+
 class App extends Component {
   constructor() {
     super();
 
+    ws.onmessage = function(msg) {
+      msg = JSON.parse(msg.data);
+      if (msg.type === 'hello') {
+        ws.send(JSON.stringify({ type: 'new_game' }));
+      }
+      console.log(msg);
+    };
+
     this.state = {
-      next_move: 6,
+      next_turn_id: 6,
       board: [
         [ '-', '-', '-', '-' ],
         [ '-', '-', 'a.2', 'b.1' ],
@@ -27,8 +37,8 @@ class App extends Component {
         size={100}
         board={this.state.board}
         my_player={'a'}
-        allow_input={true}
-        next_move_id={this.state.next_move}
+        has_next_turn={true}
+        next_turn_id={this.state.next_turn_id}
         on_select={this.select.bind(this)}
       />
       </div>
@@ -36,7 +46,7 @@ class App extends Component {
   }
   select(col) {
     this.setState({
-      next_move: 7,
+      next_turn_id: 7,
       board: [
         [ '-', '-', '-', '-' ],
         [ '-', 'a.6', 'a.2', 'b.1' ],

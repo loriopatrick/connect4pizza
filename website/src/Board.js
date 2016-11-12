@@ -16,7 +16,7 @@ class Board extends Component {
     var board = this.props.board;
     var size = this.props.size;
     var my_player = this.props.my_player;
-    var next_move_id = this.props.next_move_id;
+    var next_turn_id = this.props.next_turn_id;
     var width_px = (this.props.board.length || 0) * size;
     var height_px = (1 + (this.props.board[0] || []).length) * size + INPUT_MARGIN;
     
@@ -66,7 +66,7 @@ class Board extends Component {
     if (this.props.allow_input && this.state.input_col !== null) {
       components.push(
           <div
-            key={ 'pieces-' + next_move_id }
+            key={ 'pieces-' + next_turn_id }
             style={{
               width: size,
               height: size,
