@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 598 600" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+    <g id="Red-Piece">
+        <g transform="matrix(1.38372,0,0,1.38372,-152.093,-195.372)">
+            <circle cx="326" cy="358" r="215" style="fill:rgb(255,0,70);"/>
+        </g>
+        <g transform="matrix(2.47373,0,0,2.47373,-383.749,-464.382)">
+            <g id="Layer1">
+                <circle cx="276" cy="309" r="106" style="fill:rgb(199,11,62);"/>
+            </g>
+        </g>
+        <g transform="matrix(2.06424,0,0,1.94326,-280.019,-300.187)">
+            <g id="Layer2">
+                <circle cx="280.5" cy="308.5" r="91.5" style="fill:rgb(255,0,70);"/>
+            </g>
+        </g>
+    </g>
+</svg>

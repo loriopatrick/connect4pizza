@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 598 600" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+    <g id="Board-Unit">
+        <path d="M598,-1L598,600L1,600L1,-1L598,-1ZM299,32C446.913,32 567,152.087 567,300C567,447.913 446.913,568 299,568C151.087,568 31,447.913 31,300C31,152.087 151.087,32 299,32Z" style="fill:rgb(0,127,255);"/>
+        <path d="M299,20.5C453.26,20.5 578.5,145.74 578.5,300C578.5,454.26 453.26,579.5 299,579.5C144.74,579.5 19.5,454.26 19.5,300C19.5,145.74 144.74,20.5 299,20.5ZM299,34C450.777,34 565,148.223 565,300C565,451.777 450.777,566 299,566C147.223,566 33,451.777 33,300C33,148.223 147.223,34 299,34Z" style="fill:rgb(0,107,202);"/>
+    </g>
+</svg>
