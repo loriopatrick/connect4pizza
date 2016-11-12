@@ -15,7 +15,7 @@ function load_details(client, access_token) {
     client.fb_user = {
       id: res.id,
       name: res.name,
-      profile_image: res.data.url
+      profile_image: res.picture.data.url
     };
 
     client.status = 'auth';

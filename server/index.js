@@ -23,6 +23,9 @@ server.on('connection', function(client) {
 
     if (msg.type === 'login') {
       if (client.state !== 'no_auth') {
+        if (client.state === 'auth') {
+          return client.json({ type: 'auth', success: true });
+        }
         return client.error('already signed in');
       }
 

@@ -16,6 +16,29 @@
     <title>React App</title>
 <script>
 window.WS = new window.WebSocket('ws://localhost:8080');
+
+var handlers = [];
+window.WS.onmessage = function(msg) {
+  msg = JSON.parse(msg.data);
+  for (var i = 0; i < handlers.length; ++i) {
+    handlers[i](msg);
+  }
+};
+
+window.send = function(msg) {
+  window.WS.send(JSON.stringify(msg));
+};
+window.on_msg = function(handler) {
+  if (handler) {
+    handlers.push(handler);
+  }
+};
+window.un_msg = function(handler) {
+  var idx = handlers.indexOf(handler);
+  if (idx > -1) {
+    handlers.splice(idx, 1);
+  }
+};
 </script>
   </head>
   <body>
