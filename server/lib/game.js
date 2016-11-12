@@ -8,8 +8,13 @@ class Game {
     this.player_a = player_a;
     this.player_b = player_b;
 
+    player_a.state = 'in_game';
+    player_b.state = 'in_game';
+
     player_a.move = this.move.bind(this, 'a', player_a);
+    player_a.leave = this.move.bind(this, player_a);
     player_b.move = this.move.bind(this, 'b', player_b);
+    player_b.leave = this.move.bind(this, player_b);
 
     this.next_turn = 'a';
     this.next_turn_id = 1;
@@ -24,6 +29,22 @@ class Game {
   }
 
   leave(client) {
+    if (client === this.player_a) {
+      this.player_a = null;
+    }
+    else if (client === this.player_b) {
+      this.player_b = null;
+    }
+
+    if (this.player_a) {
+      this.player_a.state = 'auth';
+      this.player_a.json({ type: 'game_over', reason: 'leave' });
+    }
+
+    if (this.player_b) {
+      this.player_b.state = 'auth';
+      this.player_b.json({ type: 'game_over', reason: 'leave' });
+    }
   }
 
   send_state() {

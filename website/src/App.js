@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import FacebookLogin from 'react-facebook-login';
 import './App.css';
 
-var WS = window.WS = new window.WebSocket('ws://localhost:8080');
+const WS = window.WS;
 
 class App extends Component {
   onClick() {
