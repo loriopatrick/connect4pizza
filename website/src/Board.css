@@ -1,0 +1,43 @@
+.Board {
+  position: relative;
+  float: left;
+}
+
+.Board div {
+  position: absolute;
+}
+
+.Board-input {
+  float: left;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.Board-body {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.Board-outline {
+  z-index: 2;
+  background: url('/images/board-outline.svg');
+}
+
+.Board-piece {
+  transition: top 0.2s ease-in;
+}
+
+.Board-piece-r {
+  z-index: 1;
+  background: url('/images/red-piece.svg');
+}
+
+.Board-piece-y {
+  z-index: 1;
+  background: url('/images/yellow-piece.svg');
+}
