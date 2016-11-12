@@ -20,6 +20,7 @@ window.WS = new window.WebSocket('ws://localhost:8080');
 var handlers = [];
 window.WS.onmessage = function(msg) {
   msg = JSON.parse(msg.data);
+  console.log(msg);
   for (var i = 0; i < handlers.length; ++i) {
     handlers[i](msg);
   }

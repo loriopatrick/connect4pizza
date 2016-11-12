@@ -1,0 +1,22 @@
+.Player {
+  display: inline-block;
+  background: yellow;
+}
+
+.Player.me {
+  background: red;
+}
+
+.Player > img {
+  float: left;
+  clear: both;
+}
+
+.Player > span {
+  float: left;
+  clear: both;
+  text-align: center;
+  width: 100%;
+  padding: 5px;
+  font-size: 18px;
+}

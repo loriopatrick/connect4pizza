@@ -45,7 +45,6 @@ class Board extends Component {
           continue;
         }
 
-        console.log('TOKEN', p);
         var [player, turn] = p.split('.');
         var color = player === my_player ? 'r' : 'y';
 
@@ -73,6 +72,20 @@ class Board extends Component {
               height: size,
               top: 0,
               left: this.state.input_col * size,
+            }}
+            className="Board-piece Board-piece-r"
+          ></div>
+      );
+    }
+    else {
+      components.push(
+          <div
+            key={ 'pieces-' + next_turn_id }
+            style={{
+              width: size,
+              height: size,
+              top: 0,
+              left: -size,
             }}
             className="Board-piece Board-piece-r"
           ></div>

@@ -8,17 +8,17 @@ function load_details(client, access_token) {
     access_token: access_token
   }, function(res) {
     if (!res.id) {
-      client.status = 'no_auth';
+      client.state = 'no_auth';
       return client.error('failed to authenticate');
     }
 
     client.fb_user = {
       id: res.id,
       name: res.name,
-      profile_image: res.picture.data.url
+      profile_image: 'https://graph.facebook.com/' + res.id + '/picture?type=large'
     };
 
-    client.status = 'auth';
+    client.state = 'auth';
     client.json({ type: 'auth', success: true });
   });
 }

@@ -49,10 +49,19 @@ server.on('connection', function(client) {
 
       if (looking_for_game === null) {
         looking_for_game = client;
+        client.json({ type: 'wait' });
       }
       else {
         new Game(client, looking_for_game);
       }
+    }
+
+    else if (msg.type === 'game_state') {
+      if (client.state !== 'in_game') {
+        return client.error('not in game');
+      }
+
+      client.send_state();
     }
 
     else if (msg.type === 'move') {
@@ -71,6 +80,12 @@ server.on('connection', function(client) {
     if (client.leave) {
       client.leave();
     }
+
+    client.json = function() {
+      if (client.leave) {
+        client.leave();
+      }
+    };
   });
 
   client.send(JSON.stringify({ type: 'hello' }));

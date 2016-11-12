@@ -23,9 +23,15 @@ class Home extends Component {
     if (msg.type === 'auth') {
       this.setState({ logged_in: true });
     }
+    else if (msg.type === 'wait') {
+      this.setState({ waiting: true });
+    }
   }
   on_fb_login(response) {
     send({ type: 'login', access: response.accessToken });
+  }
+  play() {
+    send({ type: 'new_game' });
   }
   render() {
     var main_btn = null;
@@ -38,9 +44,14 @@ class Home extends Component {
           callback={this.on_fb_login.bind(this)} />
       );
     }
+    else if (!this.state.waiting) {
+      main_btn = (
+        <div onClick={this.play.bind(this)} className="Home-playbtn">play</div>
+      );
+    }
     else {
       main_btn = (
-        <div className="Home-playbtn">Play</div>
+        <div className="Home-playbtn">waiting...</div>
       );
     }
 

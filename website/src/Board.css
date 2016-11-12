@@ -1,6 +1,7 @@
 .Board {
   position: relative;
   float: left;
+  overflow: hidden;
 }
 
 .Board div {

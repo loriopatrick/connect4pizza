@@ -12,9 +12,12 @@ class Game {
     player_b.state = 'in_game';
 
     player_a.move = this.move.bind(this, 'a', player_a);
-    player_a.leave = this.move.bind(this, player_a);
+    player_a.leave = this.leave.bind(this, player_a);
     player_b.move = this.move.bind(this, 'b', player_b);
-    player_b.leave = this.move.bind(this, player_b);
+    player_b.leave = this.leave.bind(this, player_b);
+
+    player_a.send_state = this.send_state.bind(this);
+    player_b.send_state = this.send_state.bind(this);
 
     this.next_turn = 'a';
     this.next_turn_id = 1;
@@ -49,12 +52,20 @@ class Game {
 
   send_state() {
     var state = {
-      type: 'state',
+      type: 'game_state',
       game_over: this.game_over,
       my_player: null,
       has_next_turn: false,
       next_turn_id: this.next_turn_id,
       board: this.board,
+      player_a: {
+        name: this.player_a.fb_user.name,
+        img: this.player_a.fb_user.profile_image
+      },
+      player_b: {
+        name: this.player_b.fb_user.name,
+        img: this.player_b.fb_user.profile_image
+      }
     };
 
     if (state.game_over) {
