@@ -28,6 +28,16 @@ class Game {
       this.board[col].fill(EMPTY);
     }
 
+    this.player_a_details = {
+      name: this.player_a.fb_user.name,
+      img: this.player_a.fb_user.profile_image,
+    };
+
+    this.player_b_details = {
+      name: this.player_b.fb_user.name,
+      img: this.player_b.fb_user.profile_image,
+    };
+
     this.send_state();
   }
 
@@ -48,6 +58,10 @@ class Game {
       this.player_b.state = 'auth';
       this.player_b.json({ type: 'game_over', reason: 'leave' });
     }
+
+    this.game_over = true;
+    this.player_left = true;
+    this.send_state();
   }
 
   send_state() {
@@ -58,14 +72,9 @@ class Game {
       has_next_turn: false,
       next_turn_id: this.next_turn_id,
       board: this.board,
-      player_a: {
-        name: this.player_a.fb_user.name,
-        img: this.player_a.fb_user.profile_image
-      },
-      player_b: {
-        name: this.player_b.fb_user.name,
-        img: this.player_b.fb_user.profile_image
-      }
+      player_a: this.player_a_details,
+      player_b: this.player_b_details,
+      player_left: this.player_left
     };
 
     if (state.game_over) {

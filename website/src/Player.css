@@ -1,10 +1,15 @@
 .Player {
   display: inline-block;
   background: yellow;
+  border: solid 5px transparent;
 }
 
 .Player.me {
   background: red;
+}
+
+.Player.turn {
+  border: solid 5px black;
 }
 
 .Player > img {

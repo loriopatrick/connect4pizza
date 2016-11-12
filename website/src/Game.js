@@ -19,10 +19,7 @@ class Game extends Component {
     this._resize = this.on_resize.bind(this);
     window.addEventListener('resize', this._resize, true);
 
-    // send({ type: 'game_state' });
-
-    // temp
-    setTimeout(() => { this.on_msg({"type":"game_state","game_over":false,"my_player":"a","has_next_turn":true,"next_turn_id":7,"board":[["-","-","-","-","-","-"],["-","-","-","-","-","a.3"],["-","-","-","-","-","-"],["-","-","b.6","a.5","b.4","a.1"],["-","-","-","-","-","-"],["-","-","-","-","-","b.2"],["-","-","-","-","-","-"],["-","-","-","-","-","-"]],"player_a":{"name":"Patrick Lorio","img":"https://graph.facebook.com/10157639222350401/picture?type=large"},"player_b":{"name":"Patrick Lorio","img":"https://graph.facebook.com/10157639222350401/picture?type=large"},game_over:true, won:false})    }, 100);
+    send({ type: 'game_state' });
 
     this.state = {
       window_width: window.innerWidth,
@@ -34,7 +31,8 @@ class Game extends Component {
       has_next_turn: false,
       game_over: false,
       player_a: {},
-      player_b: {}
+      player_b: {},
+      player_left: false,
     };
   }
   componentWillUnmount() {
@@ -43,10 +41,8 @@ class Game extends Component {
   }
   on_resize() {
     this.setState({ window_width: window.innerWidth });
-    console.log('new width', window.innerWidth);
   }
   on_msg(msg) {
-    console.log('here', msg);
     if (msg.type === 'hello') {
       send({ type: 'new_game' });
     }
@@ -60,6 +56,7 @@ class Game extends Component {
         player_b: msg.player_b,
         game_over: msg.game_over,
         won: msg.won,
+        player_left: msg.player_left,
       });
     }
   }
@@ -73,22 +70,36 @@ class Game extends Component {
       if (this.state.won) {
         won_msg = <div className="Game-msg">You Won</div>;
       }
+      else if (this.state.player_left) {
+        won_msg = <div className="Game-msg">
+          Other player left
+          <a href="javascript:void();">Exit</a>
+        </div>;
+      }
       else {
         won_msg = <div className="Game-msg">You Lost</div>;
       }
     }
 
-    console.log(this.state.game_over, won_msg);
+    var turn;
+    if (this.state.my_player === 'a') {
+      turn = this.state.has_next_turn ? 'a' : 'b';
+    }
+    else {
+      turn = this.state.has_next_turn ? 'b' : 'a';
+    }
 
     return (
       <div className="Game">
         <Player
           me={this.state.my_player === 'a'}
+          turn={turn === 'a'}
           player={this.state.player_a}
         />
         <div className="Home-logo"></div>
         <Player
           me={this.state.my_player === 'b'}
+          turn={turn === 'b'}
           player={this.state.player_b}
         />
         <br/>

@@ -16,6 +16,10 @@ class App extends Component {
       page: 'home'
     };
 
+    window.set_page = (page) => {
+      this.setState({ page: page });
+    };
+
     this._handler = this.on_msg.bind(this);
     on_msg(this._handler);
   }
