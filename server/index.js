@@ -70,6 +70,13 @@ server.on('connection', function(client) {
       }
       client.move(msg.move);
     }
+    
+    else if (msg.type === 'chat') {
+      if (client.state !== 'in_game') {
+        return client.error('must be in game to chat, in ' + client.state);
+      }
+      client.message(msg.msg);
+    }
   });
 
   client.on('close', function() {

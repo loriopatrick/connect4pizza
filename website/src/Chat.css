@@ -1,0 +1,44 @@
+.Chat {
+  float: left;
+  width: 50%;
+  box-sizing: border-box;
+  position: relative;
+  min-height: 200px;
+  font-size: 18px;
+}
+
+.Chat-messages {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 30px;
+  bottom: 20px;
+  background-color: white;
+  padding: 20px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.Chat-user {
+  font-weight: bold;
+  color: orange;
+}
+
+.Chat-user.me {
+  color: red;
+}
+
+.Chat-input {
+  position: absolute;
+  left: 30px;
+  right: 0;
+  bottom: 0;
+  height: 20px;
+}
+
+.Chat-input > input {
+  width: 100%;
+  font-size: 24px;
+  padding: 5px;
+  box-sizing: border-box;
+}

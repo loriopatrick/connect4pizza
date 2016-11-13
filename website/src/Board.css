@@ -1,11 +1,21 @@
 .Board {
   position: relative;
   float: left;
-  overflow: hidden;
 }
+
 
 .Board div {
   position: absolute;
+}
+
+.Board-border {
+  position: absolute;
+  left: -7px;
+  right: -9px;
+  bottom: -9px;
+  border: solid 10px #007fff;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.9);
 }
 
 .Board-input {
@@ -27,6 +37,7 @@
 .Board-outline {
   z-index: 2;
   background: url('/images/board-outline.svg');
+  border: solid 1px #007fff;
 }
 
 .Board-piece {
