@@ -6,14 +6,14 @@ import Logo from './Logo';
 
 const WS = window.WS;
 const send = window.send;
+const $ = window.$;
 
 class Home extends Component {
   constructor() {
     super();
 
     this.state = {
-      logged_in: false,
-      show_form: true
+      logged_in: false
     };
 
     this._handler = this.on_msg.bind(this);
@@ -34,11 +34,17 @@ class Home extends Component {
     send({ type: 'login', access: response.accessToken });
   }
   play4Pizza() {
-    send({ type: 'new_game' });
+    var form_str = $(this._form).serialize().split('&');
+    var obj = {};
+    form_str.forEach((item) => {
+      var parts = item.split('=');
+      obj[parts[0]] = parts[1];
+    });
+
+    send({ type: 'pizza_payment', details: obj });
   }
   playFree() {
-    // send({ type: 'new_game' });
-    this.setState({ show_form: true });
+    send({ type: 'new_game', free: true });
   }
   render() {
     var login_cls = '';
@@ -47,6 +53,12 @@ class Home extends Component {
     if (this.state.logged_in) {
       login_cls = 'faded';
     } else {
+      nav_cls += ' faded';
+    }
+
+    var loading_msg;
+    if (this.state.waiting) {
+      loading_msg = <div className="Home-msg">Waiting for another player</div>;
       nav_cls += ' faded';
     }
 
@@ -70,12 +82,15 @@ class Home extends Component {
           </div>
         </div>
         <div className="Home-middle">
+          { loading_msg }
           <div className={ nav_cls }>
             <div>
               <button onClick={ this.playFree.bind(this) }>Casual Play</button>
             </div>
             <div>
-              <Form />
+              <strong>We do not store card details however we currently do not securely handle this information. Use this feature with extreme caution</strong>
+              <br/><br/>
+              <Form get_ref={ (form) => this._form = form } />
               <button onClick={ this.play4Pizza.bind(this) }>Play for Pizza</button>
             </div>
           </div>

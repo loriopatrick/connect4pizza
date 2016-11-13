@@ -84,7 +84,26 @@ server.on('connection', function(client) {
         return client.error('must be in auth state to add payment, currently ' + client.state);
       }
 
-      pizza.setup_customer(client, msg);
+      if (!msg.details) {
+        return client.error('missing details');
+      }
+
+      var error = false;
+
+      ["pizza_type", "street_address", "city", "state", "zip_code", "card_number", "expiry_date", "security_code", "billing_zip_code"]
+      .forEach((key) => {
+        var val = msg.details[key];
+        if (!val || !val.length) {
+          error = true;
+          return client.error('missing ' + key);
+        }
+      });
+
+      if (error) {
+        return;
+      }
+
+      client.payment_details = msg.details;
     }
   });
 

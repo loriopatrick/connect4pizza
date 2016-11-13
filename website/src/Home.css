@@ -7,6 +7,13 @@
   margin: 0 auto;
 }
 
+.Home-msg {
+  text-align: center;
+  width: 100%;
+  font-size: 24px;
+  padding: 30px;
+}
+
 .Home-vid {
   height: 400px;
   background: black;

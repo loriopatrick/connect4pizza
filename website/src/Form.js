@@ -9,7 +9,7 @@ class Form extends Component {
 
   render() {
     var state_list = (
-      <select form="playForm">
+      <select name="state">
       <option value="AL">Alabama</option>
       <option value="AK">Alaska</option>
       <option value="AZ">Arizona</option>
@@ -64,11 +64,11 @@ class Form extends Component {
     </select>);
     return (
       <div className="Form">
-        <form>
+        <form ref={ this.props.get_ref } onSubmit={ this.on_submit.bind(this) }>
           <label>Pepperoni or Cheese? (12 inch)
             <br></br>
-            <input type="radio" name="type" value="pepperoni"/>Pepperoni
-            <input type="radio" name="type" value="cheese"/>Cheese
+            <input type="radio" name="pizza_type" value="pepperoni" checked/>Pepperoni
+            <input type="radio" name="pizza_type" value="cheese"/>Cheese
           </label>
 
           <br></br>
@@ -77,10 +77,10 @@ class Form extends Component {
           <strong>Delivery Address</strong>
 
           <div>
-            <label>Street Address <input type="text" name=""></input></label>
-            <label>City <input type="text" name=""></input></label>
+            <label>Street Address <input type="text" name="street_address"></input></label>
+            <label>City <input type="text" name="city"></input></label>
             <label>State {state_list}</label>
-            <label>ZipCode <input type="text" name=""></input></label>
+            <label>ZipCode <input type="text" name="zip_code"></input></label>
           </div>
           <br></br>
           <br></br>
@@ -88,14 +88,18 @@ class Form extends Component {
           <strong>Billing Details</strong>
 
           <div>
-            <label>Card Number <input type="text" name=""></input> </label>
-            <label>Expiry Date <input type="text" name=""></input> </label>
-            <label>Security Code <input type="text" name=""></input> </label>
-            <label>Zip Code <input type="text" name=""></input> </label>
+            <label>Card Number <input type="text" name="card_number"></input> </label>
+            <label>Expiry Date <input type="text" name="expiry_date" placeholder="MMYY"></input> </label>
+            <label>Security Code <input type="text" name="security_code"></input> </label>
+            <label>Zip Code <input type="text" name="billing_zip_code"></input> </label>
           </div>
         </form>
       </div>
     );
+  }
+
+  on_submit(evt) {
+    evt.preventDefault();
   }
 
 }
