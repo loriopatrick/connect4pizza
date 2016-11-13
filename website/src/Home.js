@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FacebookLogin from 'react-facebook-login';
 import './Home.css';
 import Feed from './Feed';
+import Logo from './Logo';
 
 const WS = window.WS;
 const send = window.send;
@@ -35,59 +36,33 @@ class Home extends Component {
     send({ type: 'new_game' });
   }
   render() {
-    var facebook_btn = null;
-    var play_btn = null;
-    var video = (<div className="Video">Video</div>);
-    var feed = null;
-    if (!this.state.logged_in) {
-      facebook_btn = (
-        <div className="Home-btn">
-        <FacebookLogin
-          appId="915076568593763"
-          autoLoad={true}
-          fields="name,email,picture"
-          callback={this.on_fb_login.bind(this)} />
-          </div>
-      );
-      play_btn = (
-        <div className="Grayed Home-btn">
-        <div onClick={this.play.bind(this)} className="Home-playbtn">play</div>
-        </div>
-      );
+    var nav_cls = 'Home-nav';
+    if (this.state.logged_in) {
+      nav_cls += ' first';
     }
     else {
-      facebook_btn = (
-        <div className="Grayed Home-btn">
-        <FacebookLogin
-          appId="915076568593763"
-          autoLoad={true}
-          fields="name,email,picture"
-          callback={this.on_fb_login.bind(this)} />
-        </div>
-      );
-      if (!this.state.waiting) {
-        play_btn = (
-          <div className="Home-btn">
-          <div onClick={this.play.bind(this)}   className="Home-playbtn">play</div>
-          </div>
-        );
-      }
-      else {
-        play_btn = (
-          <div className="Home-btn">
-          <div className="Home-playbtn">waiting...</div>
-          </div>
-        );
-      }
+      nav_cls += ' second';
     }
 
     return (
       <div className="Home">
-        <div className="Home-logo"></div><br/>
-        {video}
-        {facebook_btn}
-        {play_btn}
-        <Feed />
+        <div className="Home-vid">
+          <div className="title"><Logo /></div>
+          <div className="txt">
+            Through honnor the loser buys the winner a pizza after a game of connect 4.
+          </div>
+        </div>
+        <div className={ nav_cls }>
+          <FacebookLogin
+            appId="915076568593763"
+            autoLoad={true}
+            fields="name,email,picture"
+            callback={this.on_fb_login.bind(this)}
+          />
+          <span>
+            <button onClick={ this.play.bind(this) }>Play for Pizza</button>
+          </span>
+        </div>
       </div>
     );
   }

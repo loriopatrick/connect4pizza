@@ -1,0 +1,12 @@
+.Logo {
+  height: 50px;
+  font-size: 24px;
+  padding: 7px;
+  box-sizing: border-box;
+  font-weight: bold;
+  color: black;
+}
+
+.Logo > span {
+  color: orange;
+}

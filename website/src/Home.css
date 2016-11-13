@@ -1,59 +1,64 @@
-
 .Home {
+}
+
+.Home-vid {
+  height: 400px;
+  background: black;
+  color: white;
+}
+
+.Home-vid > div.txt {
+  padding-top: 120px;
+  max-width: 50%;
+  margin: 0 auto;
+  min-width: 200px;
+  font-size: 30px;
+}
+
+.Home-vid > div.title {
+  text-align: left;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  z-index: 2;
+  background: white;
+}
+
+.Home-nav {
+  float: left;
+  width: 100%;
+  height: 60px;
+  padding-top: 10px;
+}
+
+.Home-nav.first > *:first-child, 
+.Home-nav.second > *:last-child {
+  opacity: 0.2;
+}
+
+.Home-nav > * {
+  float: left;
+  width: 50%;
+  box-sizing: border-box;
+  display: block;
   text-align: center;
 }
 
-.Home-logo {
-  width: 100px;
-  height: 100px;
-  float: left;
-  margin-top: 20px;
-  margin-left: 20px;
-  display: inline-block;
-  clear: both;
-  background: url('/images/logo.svg');
-  position: relative;
-}
-
-.Home-playbtn {
-  display: inline-block;
-  clear: both;
-  padding: 15px 50px;
-  height: 52;
-  box-sizing: border-box;
-  font-size: 18px;
+.Home-nav button {
+  font-family: Helvetica,sans-serif;
+  font-weight: 700;
+  -webkit-font-smoothing: antialiased;
+  color: #fff;
   cursor: pointer;
+  display: inline-block;
+  font-size: calc(.27548vw + 12.71074px);
+  text-decoration: none;
   text-transform: uppercase;
-  background: #ff4d00;
-  color: white;
-  font-weight: bold;
+  transition: background-color .3s,border-color .3s;
+  background-color: #4c69ba;
   border: calc(.06887vw + .67769px) solid #4c69ba;
-  margin-top: 20px;
-  position: relative;
-}
-
-.kep-login-facebook {
-  background-color: #ff4d00 !important;
-  font-size: 18px !important;
-  position: relative;
-  display: inline-block;
-  margin-top: 20px;
-  margin-right: 200px;
-}
-
-.Video {
-  position: relative;
-  height: 300px;
-  width: 100%;
-  z-index: -1;
-  font-size: 50px;
-  background: grey;
-}
-
-.Home-btn {
-  display: inline-block;
-}
-
-.Grayed {
-  opacity: 0.3;
+  padding: calc(.34435vw + 13.38843px) calc(.34435vw + 18.38843px);
+  height: 80px;
 }

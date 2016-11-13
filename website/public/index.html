@@ -21,13 +21,14 @@ window.WS = new window.WebSocket('ws://localhost:8080');
 var handlers = [];
 window.WS.onmessage = function(msg) {
   msg = JSON.parse(msg.data);
-  console.log(msg);
+  console.log('recv', msg);
   for (var i = 0; i < handlers.length; ++i) {
     handlers[i](msg);
   }
 };
 
 window.send = function(msg) {
+  console.log('send', msg);
   window.WS.send(JSON.stringify(msg));
 };
 window.on_msg = function(handler) {

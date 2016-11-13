@@ -1,6 +1,7 @@
 const WebSocketServer = require('ws').Server;
 const Game = require('./lib/game');
 const facebook_login = require('./lib/facebook');
+const pizza = require('./lib/pizza');
 
 var server = new WebSocketServer({ port: 8080 });
 console.log('server started on port 8080');
@@ -76,6 +77,14 @@ server.on('connection', function(client) {
         return client.error('must be in game to chat, in ' + client.state);
       }
       client.message(msg.msg);
+    }
+
+    else if (msg.type === 'pizza_payment') {
+      if (client.state !== 'auth') {
+        return client.error('must be in auth state to add payment, currently ' + client.state);
+      }
+
+      pizza.setup_customer(client, msg);
     }
   });
 
