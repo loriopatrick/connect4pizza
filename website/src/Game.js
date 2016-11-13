@@ -5,6 +5,7 @@ import './Home.css';
 import Board from './Board';
 import Player from './Player';
 import Chat from './Chat';
+import Logo from './Logo';
 
 const send = window.send;
 const on_msg = window.on_msg;
@@ -76,21 +77,6 @@ class Game extends Component {
     var size = this.state.window_width * 0.9 / cols;
     var width_px = size * cols;
     
-    var won_msg = null;
-    if (this.state.game_over) {
-      if (this.state.won) {
-        won_msg = <div className="Game-msg">You Won</div>;
-      }
-      else if (this.state.player_left) {
-        won_msg = <div className="Game-msg">
-          Other player left
-          <a href="javascript:void();">Exit</a>
-        </div>;
-      }
-      else {
-        won_msg = <div className="Game-msg">You Lost</div>;
-      }
-    }
 
     var turn;
     if (this.state.my_player === 'a') {
@@ -101,18 +87,40 @@ class Game extends Component {
     }
 
     var turn_msg = 'Your turn';
-    if (!this.state.has_next_turn) {
+    if (this.state.game_over) {
+      if (this.state.won) {
+        turn_msg = 'You Won';
+      }
+      else if (this.state.player_left) {
+        turn_msg = 'Other player left';
+      }
+      else {
+        turn_msg = 'You Lost';
+      }
+    }
+    else if (!this.state.has_next_turn) {
       turn_msg = 'Waiting for opponent';
     }
 
     return (
       <div className="Game">
         <div className="Game-body">
-          <div className="Game-title">
-            Connect4Pizza.com
+          <Logo />
+
+          <div className="Game-players">
+            <Player
+              me={this.state.my_player === 'a'}
+              turn={turn === 'a'}
+              player={this.state.player_a}
+            />
+
+            <Player
+              me={this.state.my_player === 'b'}
+              turn={turn === 'b'}
+              player={this.state.player_a}
+            />
           </div>
         </div>
-        {won_msg}
         <div className="Game-stripe">
           <div className="Game-body">
             <div
@@ -135,21 +143,6 @@ class Game extends Component {
         </div>
         <div className="Game-body Game-msg">{ turn_msg }</div>
 
-        <div className="Game-players">
-          <Player
-            me={this.state.my_player === 'a'}
-            turn={turn === 'a'}
-            player={this.state.player_a}
-          />
-
-          <div className="vs">VS</div>
-
-          <Player
-            me={this.state.my_player === 'b'}
-            turn={turn === 'b'}
-            player={this.state.player_a}
-          />
-        </div>
       </div>
     );
   }
