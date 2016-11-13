@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FacebookLogin from 'react-facebook-login';
 import './Home.css';
+import Feed from './Feed';
 
 const WS = window.WS;
 const send = window.send;
@@ -34,31 +35,59 @@ class Home extends Component {
     send({ type: 'new_game' });
   }
   render() {
-    var main_btn = null;
+    var facebook_btn = null;
+    var play_btn = null;
+    var video = (<div className="Video">Video</div>);
+    var feed = null;
     if (!this.state.logged_in) {
-      main_btn = (
+      facebook_btn = (
+        <div className="Home-btn">
         <FacebookLogin
           appId="915076568593763"
           autoLoad={true}
           fields="name,email,picture"
           callback={this.on_fb_login.bind(this)} />
+          </div>
       );
-    }
-    else if (!this.state.waiting) {
-      main_btn = (
+      play_btn = (
+        <div className="Grayed Home-btn">
         <div onClick={this.play.bind(this)} className="Home-playbtn">play</div>
+        </div>
       );
     }
     else {
-      main_btn = (
-        <div className="Home-playbtn">waiting...</div>
+      facebook_btn = (
+        <div className="Grayed Home-btn">
+        <FacebookLogin
+          appId="915076568593763"
+          autoLoad={true}
+          fields="name,email,picture"
+          callback={this.on_fb_login.bind(this)} />
+        </div>
       );
+      if (!this.state.waiting) {
+        play_btn = (
+          <div className="Home-btn">
+          <div onClick={this.play.bind(this)}   className="Home-playbtn">play</div>
+          </div>
+        );
+      }
+      else {
+        play_btn = (
+          <div className="Home-btn">
+          <div className="Home-playbtn">waiting...</div>
+          </div>
+        );
+      }
     }
 
     return (
       <div className="Home">
         <div className="Home-logo"></div><br/>
-        {main_btn}
+        {video}
+        {facebook_btn}
+        {play_btn}
+        <Feed />
       </div>
     );
   }

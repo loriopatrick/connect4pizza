@@ -1,0 +1,43 @@
+.Feed-Container {
+  width: 80%;
+  background: rgb(182, 188, 220);
+  margin: 0 auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  position: relative;
+  padding-top: 20px;
+  padding-bottom: 30px;
+  border-radius: 2px;
+}
+
+.Recent-Game {
+  position: relative;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 20px;
+  border: 2px solid black;
+}
+
+.Feed-Picture {
+  margin: 5px 0 5px 0;
+  height: 200px;
+  width: 150px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: inline-block;
+  border-radius: 5px;
+}
+
+.Phrase {
+  position: relative;
+  display: inline-block;
+  margin-left: 20px;
+  margin-right: 20px;
+  font-size: 25px;
+  font-family: "Helvetica"
+}
+
+.Feed-Title {
+  font-family: "Georgia";
+  font-size: 40px;
+}

@@ -19,7 +19,7 @@ class Board extends Component {
     var next_turn_id = this.props.next_turn_id;
     var width_px = (this.props.board.length || 0) * size;
     var height_px = (1 + (this.props.board[0] || []).length) * size + INPUT_MARGIN;
-    
+
     var components = [];
     for (var col = 0; col < board.length; ++col) {
       for (var row = 0; row < board[col].length; ++row) {
