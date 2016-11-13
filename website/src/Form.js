@@ -8,7 +8,8 @@ class Form extends Component {
   }
 
   render() {
-    var state_list = (<select form="playForm">
+    var state_list = (
+      <select form="playForm">
       <option value="AL">Alabama</option>
       <option value="AK">Alaska</option>
       <option value="AZ">Arizona</option>
@@ -62,52 +63,36 @@ class Form extends Component {
       <option value="WY">Wyoming</option>
     </select>);
     return (
-      <div className="Form-Container">
-        <form id="playForm">
-          <span>
-          Pepperoni or Cheese? (12 inch)
-          <br></br>
-          <input type="radio" name="type" value="pepperoni"/>Pepperoni
-          <input type="radio" name="type" value="cheese"/>Cheese
-          </span>
-          <br></br>
-          <br></br>
-          <span>
-            <span>
-            Street Address
-            <input type="text" name=""></input>
-            </span>
-            <span>
-            City
-            <input type="text" name=""></input>
-            </span>
-            <span>
-            State
-            {state_list}
-            </span>
-            <span>
-            ZipCode
-            <input type="text" name=""></input>
-            </span>
-          </span>
+      <div className="Form">
+        <form>
+          <label>Pepperoni or Cheese? (12 inch)
+            <br></br>
+            <input type="radio" name="type" value="pepperoni"/>Pepperoni
+            <input type="radio" name="type" value="cheese"/>Cheese
+          </label>
+
           <br></br>
           <br></br>
-          <span>
-            <span>
-            Card Number
-            <input type="text" name=""></input>
-            </span>
-            <span>
-            Expiry Date
-            <input type="text" name=""></input>
-            </span>
-            <span>
-            Security Code
-            <input type="text" name=""></input>
-            </span>
-          </span>
+
+          <strong>Delivery Address</strong>
+
+          <div>
+            <label>Street Address <input type="text" name=""></input></label>
+            <label>City <input type="text" name=""></input></label>
+            <label>State {state_list}</label>
+            <label>ZipCode <input type="text" name=""></input></label>
+          </div>
           <br></br>
           <br></br>
+
+          <strong>Billing Details</strong>
+
+          <div>
+            <label>Card Number <input type="text" name=""></input> </label>
+            <label>Expiry Date <input type="text" name=""></input> </label>
+            <label>Security Code <input type="text" name=""></input> </label>
+            <label>Zip Code <input type="text" name=""></input> </label>
+          </div>
         </form>
       </div>
     );

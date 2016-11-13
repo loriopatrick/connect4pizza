@@ -1,6 +1,12 @@
 .Home {
 }
 
+.Home-middle {
+  width: 900px;
+  background: white;
+  margin: 0 auto;
+}
+
 .Home-vid {
   height: 400px;
   background: black;
@@ -10,21 +16,9 @@
 
 .Home-vid > div.txt {
   padding-top: 120px;
-  max-width: 50%;
+  width: 450px;
   margin: 0 auto;
-  min-width: 200px;
   font-size: 30px;
-}
-
-.Home-vid > div.title {
-  text-align: left;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 50px;
-  z-index: 2;
-  background: white;
 }
 
 .Home-vid button {
@@ -39,6 +33,7 @@
   float: left;
   width: 100%;
   padding-top: 10px;
+  font-size: 18px;
 }
 
 .Home-nav > * {

@@ -1,15 +1,18 @@
-.Form-container {
-  display: block;
-  width: 60%;
-  margin: 0 auto;
-  margin-top: 125px;
+.Form {
+  text-align: left;
+  float: left;
+  width: 100%;
+  overflow: hidden;
+  padding-bottom: 50px;
 }
 
-.Form-container input {
-  margin-top: 15px;
-  display: inline-block;
+.Form label {
+  margin-top: 5px;
+  display: block;
+  width: 100%;
 }
 
-.Form-container span {
-  display: block;
+.Form select, .Form input[type="text"] {
+  float: right;
+  width: 200px;
 }

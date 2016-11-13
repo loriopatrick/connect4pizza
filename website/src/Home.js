@@ -43,7 +43,6 @@ class Home extends Component {
   render() {
     var login_cls = '';
     var nav_cls = 'Home-nav';
-    var form = (<div></div>);
 
     if (this.state.logged_in) {
       login_cls = 'faded';
@@ -51,16 +50,12 @@ class Home extends Component {
       nav_cls += ' faded';
     }
 
-    if (this.state.show_form) {
-      form = (<Form/>);
-    }
-
     return (
       <div className="Home">
+        <div className="Home-middle"><Logo /></div>
         <div className="Home-vid">
-          <div className="title"><Logo /></div>
           <div className="txt">
-            Through honnor the loser buys the winner a pizza after a game of connect 4.
+            It's simple, the loser buys the winner a pizza after a game of connect 4.
           </div>
           <div className={ login_cls }>
             <FacebookLogin
@@ -74,15 +69,17 @@ class Home extends Component {
             />
           </div>
         </div>
-        <div className={ nav_cls }>
-          <span>
-            <button onClick={ this.playFree.bind(this) }>Casual Play</button>
-          </span>
-          <span>
-            <button onClick={ this.play4Pizza.bind(this) }>Play for Pizza</button>
-          </span>
+        <div className="Home-middle">
+          <div className={ nav_cls }>
+            <div>
+              <button onClick={ this.playFree.bind(this) }>Casual Play</button>
+            </div>
+            <div>
+              <Form />
+              <button onClick={ this.play4Pizza.bind(this) }>Play for Pizza</button>
+            </div>
+          </div>
         </div>
-        { form }
       </div>
     );
   }
