@@ -5,6 +5,7 @@
   height: 400px;
   background: black;
   color: white;
+  text-align: center;
 }
 
 .Home-vid > div.txt {
@@ -26,16 +27,18 @@
   background: white;
 }
 
+.Home-vid button {
+  margin-top: 30px;
+}
+
+.faded {
+  opacity: 0.2;
+}
+
 .Home-nav {
   float: left;
   width: 100%;
-  height: 60px;
   padding-top: 10px;
-}
-
-.Home-nav.first > *:first-child, 
-.Home-nav.second > *:last-child {
-  opacity: 0.2;
 }
 
 .Home-nav > * {

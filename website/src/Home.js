@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import FacebookLogin from 'react-facebook-login';
 import './Home.css';
-import Feed from './Feed';
+import Form from './Form';
 import Logo from './Logo';
 
 const WS = window.WS;
@@ -12,7 +12,8 @@ class Home extends Component {
     super();
 
     this.state = {
-      logged_in: false
+      logged_in: false,
+      show_form: true
     };
 
     this._handler = this.on_msg.bind(this);
@@ -32,16 +33,26 @@ class Home extends Component {
   on_fb_login(response) {
     send({ type: 'login', access: response.accessToken });
   }
-  play() {
+  play4Pizza() {
     send({ type: 'new_game' });
   }
+  playFree() {
+    // send({ type: 'new_game' });
+    this.setState({ show_form: true });
+  }
   render() {
+    var login_cls = '';
     var nav_cls = 'Home-nav';
+    var form = (<div></div>);
+
     if (this.state.logged_in) {
-      nav_cls += ' first';
+      login_cls = 'faded';
+    } else {
+      nav_cls += ' faded';
     }
-    else {
-      nav_cls += ' second';
+
+    if (this.state.show_form) {
+      form = (<Form/>);
     }
 
     return (
@@ -51,18 +62,27 @@ class Home extends Component {
           <div className="txt">
             Through honnor the loser buys the winner a pizza after a game of connect 4.
           </div>
+          <div className={ login_cls }>
+            <FacebookLogin
+              appId="915076568593763"
+              autoLoad={true}
+              fields="name,email,picture"
+              callback={this.on_fb_login.bind(this)}
+              style={{
+                margin: '0 auto',
+              }}
+            />
+          </div>
         </div>
         <div className={ nav_cls }>
-          <FacebookLogin
-            appId="915076568593763"
-            autoLoad={true}
-            fields="name,email,picture"
-            callback={this.on_fb_login.bind(this)}
-          />
           <span>
-            <button onClick={ this.play.bind(this) }>Play for Pizza</button>
+            <button onClick={ this.playFree.bind(this) }>Casual Play</button>
+          </span>
+          <span>
+            <button onClick={ this.play4Pizza.bind(this) }>Play for Pizza</button>
           </span>
         </div>
+        { form }
       </div>
     );
   }
