@@ -4,6 +4,7 @@
 .Game-body {
   width: 90%;
   margin: 0 auto;
+  position: relative;
 }
 
 .Game-stripe {
@@ -12,7 +13,7 @@
   height: auto;
   overflow: hidden;
   padding-top: 10px;
-  padding-bottom: 80px;
+  padding-bottom: 30px;
 }
 
 .Game-title {
@@ -32,8 +33,8 @@
   text-align: center;
   float: left;
   width: 100%;
-  background: black;
-  font-size: 72px;
+  background: #007fff;
+  font-size: 32px;
   font-weight: bold;
   padding: 10px 0;
   color: white;
@@ -41,8 +42,10 @@
 }
 
 .Game-players {
-  width: 100%;
-  text-align: center;
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  margin-left: 40px;
 }
 
 .Game-players > div.vs {

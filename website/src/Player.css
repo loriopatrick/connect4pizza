@@ -1,21 +1,29 @@
 .Player {
-  display: inline-block;
-  background: yellow;
-  border: solid 5px transparent;
-}
-
-.Player.me {
-  background: red;
-}
-
-.Player.turn {
-  border: solid 5px black;
+  float: left;
+  text-align: center;
 }
 
 .Player > img {
-  float: left;
-  clear: both;
+  display: block;
+  margin: 0 auto;
+
+  background: orange;
+  border: solid 5px white;
+  border-radius: 10px;
 }
+
+.Player > img.me {
+  background: red;
+}
+
+.Player > img.turn {
+  border: solid 5px orange;
+}
+
+.Player > img.turn.me {
+  border: solid 5px red;
+}
+
 
 .Player > span {
   float: left;
@@ -24,4 +32,6 @@
   width: 100%;
   padding: 5px;
   font-size: 18px;
+  display: block;
+  width: 100%;
 }

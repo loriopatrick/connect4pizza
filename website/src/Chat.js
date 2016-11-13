@@ -13,8 +13,7 @@ class Chat extends Component {
     on_msg(this._handler);
 
     this.state = {
-      messages: [
-      ]
+      messages: []
     };
   }
 
@@ -24,8 +23,8 @@ class Chat extends Component {
 
   on_msg(msg) {
     if (msg.type === 'chat') {
-      this.state.messages.shift(msg);
-      this.setState({ messages: this.messages });
+      this.state.messages.unshift(msg);
+      this.setState({ messages: this.state.messages });
     }
   }
 
@@ -56,10 +55,22 @@ class Chat extends Component {
           { msg }
         </div>
         <div className="Chat-input">
-          <input type="text" placeholder="Chat here" />
+          <form onSubmit={ this.push_msg.bind(this) }>
+            <input type="text" value={ this.state.value } onChange={ this.update.bind(this) } placeholder="Chat here" name="text" />
+          </form>
         </div>
       </div>
     );
+  }
+
+  update(evt) {
+    this.setState({ value: evt.target.value });
+  }
+
+  push_msg(evt) {
+    evt.preventDefault();
+    send({ type: 'chat', msg: this.state.value });
+    this.setState({ value: '' });
   }
 }
 

@@ -55,8 +55,8 @@ class Board extends Component {
               style={{
                 width: size,
                 height: size,
-                top: (row + 1) * size + INPUT_MARGIN,
-                left: col * size,
+                top: (row + 1) * size + INPUT_MARGIN + 1,
+                left: col * size + 1,
               }}
               className={ 'Board-piece Board-piece-' + color }
             ></div>

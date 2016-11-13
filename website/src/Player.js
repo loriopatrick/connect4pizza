@@ -3,12 +3,12 @@ import './Player.css';
 
 class Player extends Component {
   render() {
-    var cls = 'Player';
+    var cls;
     if (this.props.me) cls += ' me';
     if (this.props.turn) cls += ' turn';
     return (
-      <div className={cls}>
-        <img src={ this.props.player.img } width={200} />
+      <div className="Player">
+        <img className={cls} src={ this.props.player.img } width={this.props.width || 80} />
         <span>{ this.props.player.name }</span>
       </div>
     );
