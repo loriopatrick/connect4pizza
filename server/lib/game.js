@@ -11,10 +11,22 @@ class Game {
     player_a.state = 'in_game';
     player_b.state = 'in_game';
 
+    this.player_a_details = {
+      name: this.player_a.fb_user.name,
+      img: this.player_a.fb_user.profile_image,
+    };
+
+    this.player_b_details = {
+      name: this.player_b.fb_user.name,
+      img: this.player_b.fb_user.profile_image,
+    };
+
     player_a.move = this.move.bind(this, 'a', player_a);
     player_a.leave = this.leave.bind(this, player_a);
+    player_a.message = this.message.bind(this, this.player_a_details.name);
     player_b.move = this.move.bind(this, 'b', player_b);
     player_b.leave = this.leave.bind(this, player_b);
+    player_b.message = this.message.bind(this, this.player_b_details.name);
 
     player_a.send_state = this.send_state.bind(this);
     player_b.send_state = this.send_state.bind(this);
@@ -28,17 +40,14 @@ class Game {
       this.board[col].fill(EMPTY);
     }
 
-    this.player_a_details = {
-      name: this.player_a.fb_user.name,
-      img: this.player_a.fb_user.profile_image,
-    };
-
-    this.player_b_details = {
-      name: this.player_b.fb_user.name,
-      img: this.player_b.fb_user.profile_image,
-    };
 
     this.send_state();
+  }
+
+  message(player_name, message) {
+    var msg = { type: 'chat', from: player_name, msg: message };
+    this.player_a.json(msg);
+    this.player_b.json(msg);
   }
 
   leave(client) {

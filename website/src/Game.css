@@ -1,13 +1,53 @@
 .Game {
-  text-align: center;
+}
+
+.Game-body {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.Game-stripe {
+  float: left;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  padding-top: 10px;
+  padding-bottom: 80px;
+}
+
+.Game-title {
+  float: left;
+  width: 100%;
+  padding: 10px 0;
+  font-size: 32px;
+  font-weight: bold;
 }
 
 .Game-board {
+  float: left;
+  width: 50%;
 }
 
 .Game-msg {
   text-align: center;
   float: left;
   width: 100%;
-  font-size: 32px;
+  background: black;
+  font-size: 72px;
+  font-weight: bold;
+  padding: 10px 0;
+  color: white;
+  margin: 10px 0;
+}
+
+.Game-players {
+  width: 100%;
+  text-align: center;
+}
+
+.Game-players > div.vs {
+  display: inline-block;
+  font-size: 72px;
+  font-weight: bold;
+  padding: 0 50px;
 }

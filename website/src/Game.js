@@ -4,6 +4,7 @@ import './Home.css';
 
 import Board from './Board';
 import Player from './Player';
+import Chat from './Chat';
 
 const send = window.send;
 const on_msg = window.on_msg;
@@ -24,11 +25,21 @@ class Game extends Component {
     this.state = {
       window_width: window.innerWidth,
       next_turn_id: 0,
-      board: [],
+      board: [
+        ['-', '-', '-', '-', '-', '-'],
+        ['-', '-', '-', '-', '-', '-'],
+        ['-', '-', '-', '-', '-', '-'],
+        ['-', '-', '-', '-', '-', '-'],
+        ['-', '-', '-', '-', '-', '-'],
+        ['-', '-', '-', '-', '-', '-'],
+        ['-', '-', '-', '-', '-', '-'],
+        ['-', '-', '-', '-', '-', '-'],
+        ['-', '-', '-', '-', '-', '-'],
+      ],
       game_over: false,
       won: false,
-      my_player: null,
-      has_next_turn: false,
+      my_player: 'a',
+      has_next_turn: true,
       game_over: false,
       player_a: {},
       player_b: {},
@@ -62,7 +73,7 @@ class Game extends Component {
   }
   render() {
     var cols = (this.state.board || []).length;
-    var size = Math.min(this.state.window_width * 0.9 / cols, 100);
+    var size = this.state.window_width * 0.9 / cols;
     var width_px = size * cols;
     
     var won_msg = null;
@@ -89,31 +100,54 @@ class Game extends Component {
       turn = this.state.has_next_turn ? 'b' : 'a';
     }
 
+    var turn_msg = 'Your turn';
+    if (!this.state.has_next_turn) {
+      turn_msg = 'Waiting for opponent';
+    }
+
     return (
       <div className="Game">
-        <Player
-          me={this.state.my_player === 'a'}
-          turn={turn === 'a'}
-          player={this.state.player_a}
-        />
-        <div className="Home-logo"></div>
-        <Player
-          me={this.state.my_player === 'b'}
-          turn={turn === 'b'}
-          player={this.state.player_b}
-        />
-        <br/>
+        <div className="Game-body">
+          <div className="Game-title">
+            Connect4Pizza.com
+          </div>
+        </div>
         {won_msg}
-        <div
-        style={{ paddingLeft: (window.innerWidth - width_px) / 2 }}
-        className="Game-board">
-          <Board
-            size={size}
-            board={this.state.board}
-            my_player={this.state.my_player}
-            has_next_turn={this.state.has_next_turn}
-            next_turn_id={this.state.next_turn_id}
-            on_select={this.select.bind(this)}
+        <div className="Game-stripe">
+          <div className="Game-body">
+            <div
+            className="Game-board">
+              <Board
+                size={size / 2}
+                board={this.state.board}
+                my_player={this.state.my_player}
+                has_next_turn={this.state.has_next_turn}
+                next_turn_id={this.state.next_turn_id}
+                on_select={this.select.bind(this)}
+              />
+            </div>
+            <Chat
+              padding={ size / 2 }
+              player={ this.state.my_player }
+              height={ size / 2 * this.state.board[0].length }
+            />
+          </div>
+        </div>
+        <div className="Game-body Game-msg">{ turn_msg }</div>
+
+        <div className="Game-players">
+          <Player
+            me={this.state.my_player === 'a'}
+            turn={turn === 'a'}
+            player={this.state.player_a}
+          />
+
+          <div className="vs">VS</div>
+
+          <Player
+            me={this.state.my_player === 'b'}
+            turn={turn === 'b'}
+            player={this.state.player_a}
           />
         </div>
       </div>

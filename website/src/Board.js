@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Board.css';
 
 const INPUT_MARGIN = 10;
+const $ = window.$;
 
 class Board extends Component {
   constructor() {
@@ -82,8 +83,8 @@ class Board extends Component {
           <div
             key={ 'pieces-' + next_turn_id }
             style={{
-              width: size,
-              height: size,
+              width: 0,
+              height: 0,
               top: 0,
               left: -size,
             }}
@@ -94,6 +95,7 @@ class Board extends Component {
 
     return (
       <div
+        ref={ (ref) => this._board_ref = ref }
         onMouseMove={ this.hover.bind(this) }
         onMouseUp={ this.click.bind(this) }
         onMouseLeave={ this.exit.bind(this) }
@@ -101,19 +103,22 @@ class Board extends Component {
         className="Board"
       >
         { components }
+        <div className="Board-border" style={{
+          top: size + 2
+        }}></div>
       </div>
     );
   }
 
   hover(evt) {
-    var col = getCol(evt, this.props.size);
+    var col = this.getCol(evt, this.props.size);
     this.setState({
       input_col: col
     });
   }
 
   click(evt) {
-    var col = getCol(evt, this.props.size);
+    var col = this.getCol(evt, this.props.size);
     if (this.props.on_select) {
       this.props.on_select(col);
     }
@@ -122,11 +127,11 @@ class Board extends Component {
   exit() {
     this.setState({ input_col: null });
   }
+  getCol(evt, size) {
+    return Math.max(Math.min(Math.floor((evt.clientX - $(this._board_ref).offset().left) / size), this.props.board.length - 1), 0);
+  }
 }
 
-function getCol(evt, size) {
-  return Math.floor(evt.clientX / size);
-}
 
 
 export default Board;
