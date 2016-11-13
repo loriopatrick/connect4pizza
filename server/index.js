@@ -1,7 +1,13 @@
+const express = require('express');
+const path = require('path');
 const WebSocketServer = require('ws').Server;
 const Game = require('./lib/game');
 const facebook_login = require('./lib/facebook');
 const pizza = require('./lib/pizza');
+
+var app = express();
+app.use(express.static(path.join(__dirname, 'website_build')));
+app.listen(process.env.PORT || 5000);
 
 var server = new WebSocketServer({ port: 8080 });
 console.log('server started on port 8080');

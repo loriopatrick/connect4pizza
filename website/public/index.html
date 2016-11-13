@@ -16,7 +16,8 @@
     -->
     <title>React App</title>
 <script>
-window.WS = new window.WebSocket('ws://localhost:8080');
+window.WS = new window.WebSocket('ws://' +
+    window.location.hostname + ':8080');
 
 var handlers = [];
 window.WS.onmessage = function(msg) {
