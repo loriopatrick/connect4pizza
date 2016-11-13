@@ -23,10 +23,10 @@ class Game {
 
     player_a.move = this.move.bind(this, 'a', player_a);
     player_a.leave = this.leave.bind(this, player_a);
-    player_a.message = this.message.bind(this, this.player_a_details.name);
+    player_a.message = this.message.bind(this, 'a', this.player_a_details.name);
     player_b.move = this.move.bind(this, 'b', player_b);
     player_b.leave = this.leave.bind(this, player_b);
-    player_b.message = this.message.bind(this, this.player_b_details.name);
+    player_b.message = this.message.bind(this, 'b', this.player_b_details.name);
 
     player_a.send_state = this.send_state.bind(this);
     player_b.send_state = this.send_state.bind(this);
@@ -44,8 +44,16 @@ class Game {
     this.send_state();
   }
 
-  message(player_name, message) {
-    var msg = { type: 'chat', from: player_name, msg: message };
+  message(player, player_name, message) {
+    var msg_id = (this._chat_msg_id || 0) + 1;
+    var msg = {
+      id: msg_id,
+      type: 'chat',
+      from: player_name,
+      msg: message,
+      player: player,
+    };
+    this._chat_msg_id = msg_id;
     this.player_a.json(msg);
     this.player_b.json(msg);
   }
