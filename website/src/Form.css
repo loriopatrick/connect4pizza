@@ -1,0 +1,15 @@
+.Form-container {
+  display: block;
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 125px;
+}
+
+.Form-container input {
+  margin-top: 15px;
+  display: inline-block;
+}
+
+.Form-container span {
+  display: block;
+}
